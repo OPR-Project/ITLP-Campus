@@ -2,6 +2,24 @@
 
 ## Indoor
 
+### Data
+
+| Track | Frames, pcs | Front cam, res | Back cam, res | LiDAR, rays | 6 DoF pose | Semantic masks |
+|  :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 5th_floor_with_loops | $3883$ | $1280\times 720$ | $1280\times 720$ | 16 | &#9745; | None  |
+<br/>
+
+6 DoF poses are obtained using Cartographer SLAM with global localization in a pre-built map.
+
+### Sensors
+
+| Sensor | Model | Resolution | 
+|  :---: | :---: | :---: | 
+| Front cam | ZED (stereo) | $1920\times 1080$ |
+| Back cam | RealSense D435 | $1920\times 1080$ |
+| LiDAR | VLP-16 | $16\times 1824$ |
+<br/>
+
 ## Outdoor
 The outdor part of this dataset was recorded on the Husky robotics platform on the university campus and consists of 5 tracks recorded at different times of day (day/dusk/night) and different seasons (winter/spring).
 
