@@ -13,8 +13,8 @@
 
 ### Sensors
 
-| Sensor | Model | Resolution | 
-|  :---: | :---: | :---: | 
+| Sensor | Model | Resolution |
+|  :---: | :---: | :---: |
 | Front cam | ZED (stereo) | $1920\times 1080$ |
 | Back cam | RealSense D435 | $1920\times 1080$ |
 | LiDAR | VLP-16 | $16\times 1824$ |
@@ -38,8 +38,8 @@ The outdor part of this dataset was recorded on the Husky robotics platform on t
 
 ### Sensors
 
-| Sensor | Model | Resolution | 
-|  :---: | :---: | :---: | 
+| Sensor | Model | Resolution |
+|  :---: | :---: | :---: |
 | Front cam | ZED (stereo) | $1920\times 1080$ |
 | Back cam | RealSense D435 | $1920\times 1080$ |
 | LiDAR | VLP-16 | $16\times 1824$ |
@@ -52,12 +52,12 @@ Semantic masks are obtained using the [Oneformer](https://github.com/SHI-Labs/On
 The masks are stored as mono-channel images.Each pixel stores a semantic label. Examples of semantic information are shown in the table below:
 | Label | Semantic class | Color, [r, g, b] |
 |  :---: | :---: | :---: |
-| ... | ... | ... | 
+| ... | ... | ... |
 | 10 | Parking| [250, 170, 160] |
 | 11 | Pedestrin Area | [96, 96, 96] |
-| 12 | Rail Track | [230, 150, 140] | 
+| 12 | Rail Track | [230, 150, 140] |
 | 13 | Road | [128, 64, 128] |
-| ... | ... | ... | 
+| ... | ... | ... |
 <br/>
 
 The complete list of semantic labels and their colors are described in the file [anno_config.json](cfg/anno_config.json).
@@ -105,3 +105,23 @@ where
 An example of a track trajectory  (track_map.png):
 ![](img/00_track_map.png)
 
+
+## PyTorch dataset API
+
+Implementation of PyTorch's dataset class for ITLP track is provided in the `[src/dataset.py](./src/dataset.py)` file.
+
+That class can be used for loading the track's data in the format of `torch.Tensor`.
+
+Usage example:
+
+```python
+track_dir = Path("/path/to/ITLP_Campus_outdoor/00_2023-02-21")
+
+dataset = ITLPCampus(
+    dataset_root=track_dir,                      # track directory
+    sensors=["front_cam", "back_cam", "lidar"],  # list of sensors for which you want to load data
+    load_semantics=True,                         # whether to return semantic masks for cameras
+)
+
+data = dataset[0]  # will return dictionary with the first frame of the track
+```
