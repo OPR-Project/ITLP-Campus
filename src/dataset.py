@@ -107,7 +107,7 @@ class ITLPCampus(Dataset):
         self.load_text_labels = load_text_labels
         if self.load_text_labels:
             if "front_cam" in self.sensors:
-                self.front_cam_labels_df = pd.read_csv(
+                self.front_cam_text_labels_df = pd.read_csv(
                     self.dataset_root / self.text_labels_subdir / "front_cam_text_labels.csv"
                 )
             if "back_cam" in self.sensors:
@@ -268,3 +268,61 @@ class ITLPCampus(Dataset):
             plt.show()
         plt.close(fig)
         return img
+
+    def visualize_text_labels(
+        self, idx: int, camera: Literal["front_cam", "back_cam"] = "front_cam", show: bool = False
+    ) -> np.ndarray:
+        """Method to visualize detected text labels on the image.
+
+        Args:
+            idx (int): Index of dataset element to visualize.
+            camera (Literal["front_cam", "back_cam"]): Which camera should be used. Defaults to "front_cam".
+            show (bool, optional): Show image with detections using `plt.show()`. Defaults to False.
+
+        Raises:
+            ValueError: If tried to load text labels with load_text_labels=False
+            ValueError: If wrong 'camera' argument is given.
+
+        Returns:
+            np.ndarray: Image with detected labels in `cv2` RGB format: (H, W, 3).
+        """
+        if not self.load_text_labels:
+            raise ValueError("Tried to load text labels with load_text_labels=False")
+        row = self.dataset_df.iloc[idx]
+        image_name = f"{int(row[f'{camera}_ts'])}.png"
+        im_filepath = self.dataset_root / self.images_subdir / camera / image_name
+        im = cv2.cvtColor(cv2.imread(str(im_filepath)), cv2.COLOR_BGR2RGB)
+        if camera == "front_cam":
+            text_labels_df = self.front_cam_text_labels_df[
+                self.front_cam_text_labels_df["image_name"] == image_name
+            ]
+        elif camera == "back_cam":
+            text_labels_df = self.back_cam_text_labels_df[
+                self.back_cam_text_labels_df["image_name"] == image_name
+            ]
+        else:
+            raise ValueError("Wrong 'camera' argument given: you should select 'front_cam' or 'back_cam'")
+
+        bboxes = text_labels_df[["x1", "y1", "x2", "y2", "x3", "y3", "x4", "y4"]].to_numpy()
+        texts = text_labels_df[["text"]].to_numpy().tolist()
+        for bbox, text in zip(bboxes, texts):
+            im = cv2.polylines(
+                im, pts=[bbox.reshape(-1, 1, 2)], isClosed=True, color=(0, 255, 0), thickness=2
+            )
+            im = cv2.putText(
+                im,
+                text=str(text[0]),
+                org=bbox.reshape(-1, 2)[0],
+                fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+                fontScale=1,
+                color=(0, 255, 0),
+                thickness=2,
+            )
+
+        if show:
+            plt.imshow(im)
+            plt.axis("off")
+            plt.tight_layout()
+            plt.show()
+
+        return im
