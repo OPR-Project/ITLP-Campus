@@ -232,3 +232,39 @@ class ITLPCampus(Dataset):
             plt.show()
 
         return blended_img
+
+    def visualize_pointcloud(self, idx: int, show: bool = False) -> np.ndarray:
+        """Method to visualize LiDAR's point cloud.
+
+        Args:
+            idx (int): Index of dataset element to visualize.
+            show (bool): Show pointcloud using `plt.show()`. Defaults to False.
+
+        Returns:
+            np.ndarray: Point cloud image in `cv2` RGB format: (H, W, 3).
+        """
+        row = self.dataset_df.iloc[idx]
+        pc_filepath = self.dataset_root / self.clouds_subdir / f"{int(row['lidar_ts'])}.bin"
+        pc = self._load_pc(pc_filepath).numpy()
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection="3d")
+        ax.set_xlim([-30, 30])
+        ax.set_ylim([-30, 30])
+        ax.set_zlim([-10, 20])
+
+        dist = np.sqrt(np.sum(np.square(pc), axis=1))
+        norm = plt.Normalize(dist.min(), dist.max())
+        colors = plt.cm.jet(norm(dist))
+
+        ax.scatter(pc[:, 0], pc[:, 1], pc[:, 2], s=0.2, c=colors, marker="o")
+        ax.view_init(elev=45, azim=180)
+        ax.set_axis_off()
+        plt.tight_layout()
+        fig.canvas.draw()
+        img = cv2.cvtColor(np.asarray(fig.canvas.buffer_rgba()), cv2.COLOR_RGBA2RGB)
+        img = img.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+        if show:
+            plt.show()
+        plt.close(fig)
+        return img
