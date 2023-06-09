@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Dict, List, Literal, Optional, Tuple, Union
 
 import cv2
+import gdown
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -62,7 +63,7 @@ class ITLPCampus(Dataset):
         """ITLP Campus dataset implementation.
 
         Args:
-            dataset_root (Union[str, Path]): Path to the dataset root directory.
+            dataset_root (Union[str, Path]): Path to the dataset track root directory.
             sensors (Union[str, Tuple[str, ...]]): List of sensors for which the data should be loaded.
                 Defaults to ("front_cam", "lidar").
             mink_quantization_size (Optional[float]): The quantization size for point clouds. Defaults to 0.5.
@@ -72,6 +73,7 @@ class ITLPCampus(Dataset):
             load_text_labels (bool): Wether to load detected text for camera images. Defaults to False.
             load_aruco_labels (bool): Wether to load detected aruco labels for camera images.
                 Defaults to False.
+            indoor (bool): Wether to load indoor or outdoor dataset track. Defaults to False.
 
         Raises:
             FileNotFoundError: If dataset_root doesn't exist.
@@ -116,14 +118,14 @@ class ITLPCampus(Dataset):
                 )
 
         self.load_aruco_labels = load_aruco_labels
-        if self.load_text_descriptions:
+        if self.load_aruco_labels:
             if "front_cam" in self.sensors:
                 self.front_cam_aruco_labels_df = pd.read_csv(
-                    self.dataset_root / self.aruco_labels_subdir / "front_cam_aruco_labels.csv"
+                    self.dataset_root / self.aruco_labels_subdir / "front_cam_aruco_labels.csv", sep="\t"
                 )
             if "back_cam" in self.sensors:
                 self.back_cam_aruco_labels_df = pd.read_csv(
-                    self.dataset_root / self.aruco_labels_subdir / "back_cam_aruco_labels.csv"
+                    self.dataset_root / self.aruco_labels_subdir / "back_cam_aruco_labels.csv", sep="\t"
                 )
 
         self.indoor = indoor
@@ -153,6 +155,21 @@ class ITLPCampus(Dataset):
                 im = cv2.imread(str(im_filepath), cv2.IMREAD_UNCHANGED)
                 im = self.semantic_transform(im)
                 data["semantic_front_cam"] = im
+            if self.load_text_labels:
+                text_labels_df = self.front_cam_text_labels_df[
+                    self.front_cam_text_labels_df["path"] == f"{image_ts}.png"
+                ]
+                data["text_labels_front_cam_df"] = text_labels_df
+            if self.load_text_descriptions:
+                text_description_df = self.front_cam_text_descriptions_df[
+                    self.front_cam_text_descriptions_df["path"] == f"{image_ts}.png"
+                ]
+                data["text_description_front_cam_df"] = text_description_df
+            if self.load_aruco_labels:
+                aruco_labels_df = self.front_cam_aruco_labels_df[
+                    self.front_cam_aruco_labels_df["image_name"] == f"{image_ts}.png"
+                ]
+                data["aruco_labels_front_cam_df"] = aruco_labels_df
         if "back_cam" in self.sensors:
             image_ts = int(row["back_cam_ts"])
             im_filepath = self.dataset_root / self.images_subdir / "back_cam" / f"{image_ts}.png"
@@ -167,6 +184,21 @@ class ITLPCampus(Dataset):
                 im = cv2.imread(str(im_filepath), cv2.IMREAD_UNCHANGED)
                 im = self.semantic_transform(im)
                 data["semantic_back_cam"] = im
+            if self.load_text_labels:
+                text_labels_df = self.back_cam_text_labels_df[
+                    self.back_cam_text_labels_df["path"] == f"{image_ts}.png"
+                ]
+                data["text_labels_back_cam_df"] = text_labels_df
+            if self.load_text_descriptions:
+                text_description_df = self.back_cam_text_descriptions_df[
+                    self.back_cam_text_descriptions_df["path"] == f"{image_ts}.png"
+                ]
+                data["text_description_back_cam_df"] = text_description_df
+            if self.load_aruco_labels:
+                aruco_labels_df = self.back_cam_aruco_labels_df[
+                    self.back_cam_aruco_labels_df["image_name"] == f"{image_ts}.png"
+                ]
+                data["aruco_labels_back_cam_df"] = aruco_labels_df
         if "lidar" in self.sensors:
             pc_filepath = self.dataset_root / self.clouds_subdir / f"{int(row['lidar_ts'])}.bin"
             pc = self._load_pc(pc_filepath)
@@ -294,17 +326,19 @@ class ITLPCampus(Dataset):
         im = cv2.cvtColor(cv2.imread(str(im_filepath)), cv2.COLOR_BGR2RGB)
         if camera == "front_cam":
             text_labels_df = self.front_cam_text_labels_df[
-                self.front_cam_text_labels_df["image_name"] == image_name
+                self.front_cam_text_labels_df["path"] == image_name
             ]
         elif camera == "back_cam":
-            text_labels_df = self.back_cam_text_labels_df[
-                self.back_cam_text_labels_df["image_name"] == image_name
-            ]
+            text_labels_df = self.back_cam_text_labels_df[self.back_cam_text_labels_df["path"] == image_name]
         else:
             raise ValueError("Wrong 'camera' argument given: you should select 'front_cam' or 'back_cam'")
 
-        bboxes = text_labels_df[["x1", "y1", "x2", "y2", "x3", "y3", "x4", "y4"]].to_numpy()
-        texts = text_labels_df[["text"]].to_numpy().tolist()
+        bboxes = (
+            text_labels_df[["x_lt", "y_lt", "x_rt", "y_rt", "x_rb", "y_rb", "x_lb", "y_lb"]]
+            .to_numpy()
+            .astype(int)
+        )
+        texts = text_labels_df[["label"]].to_numpy().tolist()
         for bbox, text in zip(bboxes, texts):
             im = cv2.polylines(
                 im, pts=[bbox.reshape(-1, 1, 2)], isClosed=True, color=(0, 255, 0), thickness=2
@@ -313,7 +347,7 @@ class ITLPCampus(Dataset):
                 im,
                 text=str(text[0]),
                 org=bbox.reshape(-1, 2)[0],
-                fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+                fontFace=cv2.FONT_HERSHEY_COMPLEX,
                 fontScale=1,
                 color=(0, 255, 0),
                 thickness=2,
@@ -326,3 +360,87 @@ class ITLPCampus(Dataset):
             plt.show()
 
         return im
+
+    def visualize_aruco_labels(
+        self, idx: int, camera: Literal["front_cam", "back_cam"] = "front_cam", show: bool = False
+    ) -> np.ndarray:
+        """Method to visualize detected aruco labels on the image.
+
+        Args:
+            idx (int): Index of dataset element to visualize.
+            camera (Literal["front_cam", "back_cam"]): Which camera should be used. Defaults to "front_cam".
+            show (bool, optional): Show image with detections using `plt.show()`. Defaults to False.
+
+        Raises:
+            ValueError: If tried to load text labels with load_aruco_labels=False
+            ValueError: If wrong 'camera' argument is given.
+
+        Returns:
+            np.ndarray: Image with detected aruco labels in `cv2` RGB format: (H, W, 3).
+        """
+        if not self.load_aruco_labels:
+            raise ValueError("Tried to load text labels with load_aruco_labels=False")
+        row = self.dataset_df.iloc[idx]
+        image_name = f"{int(row[f'{camera}_ts'])}.png"
+        im_filepath = self.dataset_root / self.images_subdir / camera / image_name
+        im = cv2.cvtColor(cv2.imread(str(im_filepath)), cv2.COLOR_BGR2RGB)
+        if camera == "front_cam":
+            aruco_labels_df = self.front_cam_aruco_labels_df[
+                self.front_cam_aruco_labels_df["image_name"] == image_name
+            ]
+        elif camera == "back_cam":
+            aruco_labels_df = self.back_cam_aruco_labels_df[
+                self.back_cam_aruco_labels_df["image_name"] == image_name
+            ]
+        else:
+            raise ValueError("Wrong 'camera' argument given: you should select 'front_cam' or 'back_cam'")
+
+        bboxes = aruco_labels_df[["x1", "y1", "x2", "y2", "x3", "y3", "x4", "y4"]].to_numpy().astype(int)
+        texts = aruco_labels_df[["aruco_id"]].to_numpy().tolist()
+        for bbox, text in zip(bboxes, texts):
+            im = cv2.polylines(
+                im, pts=[bbox.reshape(-1, 1, 2)], isClosed=True, color=(0, 255, 0), thickness=2
+            )
+            im = cv2.putText(
+                im,
+                text=str(text[0]),
+                org=bbox.reshape(-1, 2)[0],
+                fontFace=cv2.FONT_HERSHEY_COMPLEX,
+                fontScale=2,
+                color=(0, 0, 255),
+                thickness=2,
+            )
+
+        if show:
+            plt.imshow(im)
+            plt.axis("off")
+            plt.tight_layout()
+            plt.show()
+
+        return im
+
+    @staticmethod
+    def download_data(out_dir: Path) -> None:
+        outdoor_tracks_dict = {
+            "00_2023-02-10": "",
+            "01_2023-02-21": "",
+            "02_2023-03-15": "",
+            "03_2023-04-11": "",
+            "04_2023-04-13": "",
+        }
+        indoor_tracks_dict = {
+            "00_2023-03-13": "",
+        }
+
+        if not out_dir.exists():
+            print(f"Creating output directory: {out_dir}")
+            out_dir.mkdir(parents=True)
+        else:
+            print(f"Will download in existing directory: {out_dir}")
+
+        (out_dir / "ITLP_Campus_outdoor").mkdir(exist_ok=True)
+        for track_name, url in outdoor_tracks_dict.items():
+            gdown.download(url, output=str(out_dir / f"{track_name}.zip"), quiet=False, fuzzy=True)
+        (out_dir / "ITLP_Campus_indoor").mkdir(exist_ok=True)
+        for track_name, url in indoor_tracks_dict.items():
+            gdown.download(url, output=str(out_dir / f"{track_name}.zip"), quiet=False, fuzzy=True)
