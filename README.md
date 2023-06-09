@@ -1,12 +1,20 @@
 # ITLP-Campus
 
+## Download
+
+| Cloud Storage | link | 
+|  :---: | :---: |
+| Google Drive | [link](https://drive.google.com/drive/folders/14-0Ew5qVWh607tdFsovbXZsdWX-vU-Vy?usp=sharing) |
+| Yandex Disk | [link](https://disk.yandex.ru/d/mw4qmSfCBEAh7w) |
+<br/>
+
 ## Indoor
 
 ### Data
 
-| Track | Frames, pcs | Front cam, res | Back cam, res | LiDAR, rays | 6 DoF pose | Semantic masks |
-|  :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 5th_floor_with_loops | $3883$ | $1280\times 720$ | $1280\times 720$ | 16 | &#9745; | None  |
+| Track | Frames, pcs | Front cam, res | Back cam, res | LiDAR, rays | 6 DoF pose | Semantic masks | Aruco ID | OCR Text labels |
+|  :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 5th_floor_with_loops | $3883$ | $1280\times 720$ | $1280\times 720$ | 16 | &#9745; | $1280	\times 720 \times 150$  | &#9745; | &#9745; |
 <br/>
 
 6 DoF poses are obtained using Cartographer SLAM with global localization in a pre-built map.
@@ -15,8 +23,8 @@
 
 | Sensor | Model | Resolution |
 |  :---: | :---: | :---: |
-| Front cam | ZED (stereo) | $1920\times 1080$ |
-| Back cam | RealSense D435 | $1920\times 1080$ |
+| Front cam | ZED (stereo) | $1280\times 720$ |
+| Back cam | RealSense D435 | $1280\times 720$ |
 | LiDAR | VLP-16 | $16\times 1824$ |
 <br/>
 
@@ -45,13 +53,13 @@ The outdor part of this dataset was recorded on the Husky robotics platform on t
 
 ### Data
 
-| Track | Season | Time of day | Frames, pcs | Front cam, res | Back cam, res | LiDAR, rays | 6 DoF pose | Semantic masks |
-|  :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 00_2023-02-21 | winter | day | $620$ | $1920\times 1080$ | $1920\times 1080$ | 16 | &#9745; | front + back <br/> $1920\times 1080 \times 65$ classes  |
-| 01_2023-03-15 | winter| night | $626$ | $1920\times 1080$ | $1920\times 1080$ | 16 | &#9745; | front + back <br/> $1920\times 1080 \times 65$ classes  |
-| 02_2023-02-10 | winter | twilight | $609$ | $1920\times 1080$ | $1920\times 1080$ | 16 | &#9745; | front + back <br/> $1920\times 1080 \times 65$ classes  |
-| 03_2023-04-11 | spring | day | $638$ | $1920\times 1080$ | $1920\times 1080$ | 16 | &#9745; | front + back <br/> $1920\times 1080 \times 65$ classes  |
-| 11_2023-04-13 | spring | night | $631$ | $1920\times 1080$ | $1920\times 1080$ | 16 | &#9745; |  front + back <br/> $1920\times 1080 \times 65$ classes  |
+| Track | Season | Time of day | Frames, pcs | Front cam, res | Back cam, res | LiDAR, rays | 6 DoF pose | Semantic masks | Aruco ID | OCR Text labels |
+|  :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |:---: | :---: | :---: |
+| 00_2023-02-21 | winter | day | $620$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; | front + back <br/> $1280	\times 720 \times 65$ classes  | &#9745; | &#9745; |
+| 01_2023-03-15 | winter| night | $626$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; | front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
+| 02_2023-02-10 | winter | twilight | $609$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; | front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
+| 03_2023-04-11 | spring | day | $638$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; | front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
+| 11_2023-04-13 | spring | night | $631$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; |  front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
 <br/>
 
 6 DoF poses obtained using ALeGO-LOAM localization method refined with Interactive SLAM.
@@ -60,8 +68,8 @@ The outdor part of this dataset was recorded on the Husky robotics platform on t
 
 | Sensor | Model | Resolution |
 |  :---: | :---: | :---: |
-| Front cam | ZED (stereo) | $1920\times 1080$ |
-| Back cam | RealSense D435 | $1920\times 1080$ |
+| Front cam | ZED (stereo) | $1280	\times 720$ |
+| Back cam | RealSense D435 | $1280	\times 720$ |
 | LiDAR | VLP-16 | $16\times 1824$ |
 <br/>
 
@@ -91,26 +99,35 @@ The data are organized by tracks, the length of one track is about 3 km, each tr
 
 The structure of track data storage is as follows:
 ```text
-00_2023-02-21
+Track ##
 ├── back_cam
-│   ├── ####.png
-│   └── ####.png
-├── demo.mp4
+│   ├── ####.png
+│   └── ####.png
 ├── front_cam
-│   ├── ####.png
-│   └── ####.png
-├── labels
-│   ├── back_cam
-│   │   ├── ####.png
-│   │   └── ####.png
-│   └── front_cam
-│       ├── ####.png
-│       └── ####.png
+│   ├── ####.png
+│   └── ####.png
+├── masks
+│   ├── back_cam
+│   │   ├── ####.png
+│   │   └── ####.png
+│   └── front_cam
+│       ├── ####.png
+│       └── ####.png
+├── text_descriptions
+│   ├── back_cam_text.csv
+│   └── front_cam_text.csv
+├── text_labels
+│   ├── back_cam_text_labels.csv
+│   └── front_cam_text_labels.csv
+├── aruco_labels
+│   ├── back_cam_aruco_labels.csv
+│   └── front_cam_aruco_labels.csv
 ├── lidar
-│   ├── ####.bin
-│   └── ####.bin
-├── test.png
+│   ├── ####.bin
+│   └── ####.bin
+├── demo.mp4
 ├── track.csv
+├── meta_info.csv
 └── track_map.png
 ```
 
