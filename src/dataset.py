@@ -420,7 +420,7 @@ class ITLPCampus(Dataset):
         return im
 
     @staticmethod
-    def download_data(out_dir: Path) -> None:
+    def download_data(out_dir: Union[Path, str]) -> None:
         outdoor_tracks_dict = {
             "00_2023-02-10": "",
             "01_2023-02-21": "",
@@ -432,6 +432,7 @@ class ITLPCampus(Dataset):
             "00_2023-03-13": "",
         }
 
+        out_dir = Path(out_dir)
         if not out_dir.exists():
             print(f"Creating output directory: {out_dir}")
             out_dir.mkdir(parents=True)
