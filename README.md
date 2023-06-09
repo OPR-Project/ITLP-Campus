@@ -43,10 +43,10 @@ The masks are stored as mono-channel images.Each pixel stores a semantic label. 
 | ... | ... | ... |
 <br/>
 
-The semantic markup contains a total of $150$ classes. A complete table of all semantic classes is given in the table - [cfg/indoor_anno_description.md](cfg/indoor_anno_description.md). To map the id labels with rgb colors you should use the configuration file - [cfg/indoor_anno_config.json](cfg/indoor_anno_config.json) #TODO **there is no indor anno config**.
+The semantic markup contains a total of $150$ classes. A complete table of all semantic classes is given in the table - [cfg/indoor_anno_description.md](cfg/indoor_anno_description.md). To map the id labels with rgb colors you should use the configuration file - [cfg/indoor_anno_config.json](cfg/indoor_anno_config.json).
 
 An example of a mask over the image:
-![place your image here]()
+![](img/sem_mask_image_indoor.png)
 
 ## Outdoor
 The outdor part of this dataset was recorded on the Husky robotics platform on the university campus and consists of 5 tracks recorded at different times of day (day/dusk/night) and different seasons (winter/spring).
