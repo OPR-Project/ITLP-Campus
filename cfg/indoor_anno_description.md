@@ -2,7 +2,7 @@
 
 The table below shows the semantic labels of labeled images for dataset tracks collected outdoors
 
-| Label ID | Semantic Class | Color | [r | g | b] | Category |
+| Label ID | Semantic Class | Color, [r, g, b] | Category |
 | :---: | :---: | :---: | :---: |
 | $0$ | wall | [120, 120, 120] | Static (background) |
 | $1$ | building; edifice | [180, 120, 120] | Special (Key) |
