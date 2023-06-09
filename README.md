@@ -2,7 +2,7 @@
 
 ## Download
 
-| Cloud Storage | link | 
+| Cloud Storage | link |
 |  :---: | :---: |
 | Google Drive | [link](https://drive.google.com/drive/folders/14-0Ew5qVWh607tdFsovbXZsdWX-vU-Vy?usp=sharing) |
 | Yandex Disk | [link](https://disk.yandex.ru/d/mw4qmSfCBEAh7w) |
@@ -146,7 +146,7 @@ An example of a mask over the image:
 
 ## PyTorch dataset API
 
-Implementation of PyTorch's dataset class for ITLP track is provided in the `[src/dataset.py](./src/dataset.py)` file.
+Implementation of PyTorch's dataset class for ITLP-Campus track is provided in the `[src/dataset.py](./src/dataset.py)` file.
 
 That class can be used for loading the track's data in the format of `torch.Tensor`.
 
@@ -159,7 +159,28 @@ dataset = ITLPCampus(
     dataset_root=track_dir,                      # track directory
     sensors=["front_cam", "back_cam", "lidar"],  # list of sensors for which you want to load data
     load_semantics=True,                         # whether to return semantic masks for cameras
+    load_text_descriptions=False,                # whether to return text descriptions for cameras
+    load_text_labels=False,                      # whether to return detected text labels for cameras
+    load_aruco_labels=False,                     # whether to return detected aruco labels for cameras
+    indoor=False,                                # indoor or outdoor track
 )
 
 data = dataset[0]  # will return dictionary with the first frame of the track
+```
+
+### Download
+
+You can download the dataset using API:
+
+```python
+from src.dataset import ITLPCampus
+
+ITLPCampus.download(out_dir="path/to/directory/where/you/want/to/save/dataset")
+```
+
+Or you can use provided [download_dataset.py](./download_dataset.py) script:
+
+```bash
+# in repository root directory
+python download_dataset.py --output_dir [OUTPUT_DIR]
 ```
