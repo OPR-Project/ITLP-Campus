@@ -20,6 +20,26 @@
 | LiDAR | VLP-16 | $16\times 1824$ |
 <br/>
 
+#### Semantics
+
+Semantic masks are obtained using the [Oneformer](https://github.com/SHI-Labs/OneFormer)  pre-trained on the [<Dataset-name>](dataset-webpage) dataset.
+
+The masks are stored as mono-channel images.Each pixel stores a semantic label. Examples of semantic information are shown in the table below:
+| Label | Semantic class | Color, [r, g, b] |
+|  :---: | :---: | :---: |
+| ... | ... | ... |
+| <n> | <class a>| [r, g, b] |
+| <n+1> | <class b> | [r, g, b] |
+| <n+2> | <class c> | [r, g, b] |
+| <n+3> | <class d> | [r, g, b] |
+| ... | ... | ... |
+<br/>
+
+The semantic markup contains a total of $150$ classes. A complete table of all semantic classes is given in the table - [cfg/indoor_anno_description.md](cfg/indoor_anno_description.md). To map the id labels with rgb colors you should use the configuration file - [cfg/indoor_anno_config.json](cfg/indoor_anno_config.json) #TODO **there is no indor anno config**.
+
+An example of a mask over the image:
+![place your image here]()
+
 ## Outdoor
 The outdor part of this dataset was recorded on the Husky robotics platform on the university campus and consists of 5 tracks recorded at different times of day (day/dusk/night) and different seasons (winter/spring).
 
@@ -60,7 +80,7 @@ The masks are stored as mono-channel images.Each pixel stores a semantic label. 
 | ... | ... | ... |
 <br/>
 
-The complete list of semantic labels and their colors are described in the file [anno_config.json](cfg/anno_config.json).
+The semantic markup contains a total of $65$ classes. A complete table of all semantic classes is given in the table - [cfg/outdoor_anno_description.md](cfg/outdoor_anno_description.md). To map the id labels with rgb colors you should use the configuration file - [cfg/outdoor_anno_config.json](cfg/outdoor_anno_config.json).
 
 An example of a mask over the image:
 ![](img/segmentation_mask_over_image_demo.png)
