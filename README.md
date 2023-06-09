@@ -28,10 +28,10 @@ The masks are stored as mono-channel images.Each pixel stores a semantic label. 
 | Label | Semantic class | Color, [r, g, b] |
 |  :---: | :---: | :---: |
 | ... | ... | ... |
-| <n> | <class a>| [r, g, b] |
-| <n+1> | <class b> | [r, g, b] |
-| <n+2> | <class c> | [r, g, b] |
-| <n+3> | <class d> | [r, g, b] |
+| $23$ | sofa; couch; lounge | [11, 102, 255] |
+| $34$ | rock; stone | [255, 41, 10] |
+| $67$ | book | [255, 163, 0] |
+| $124$ | microwave; microwave; oven | [255, 0, 235] |
 | ... | ... | ... |
 <br/>
 
