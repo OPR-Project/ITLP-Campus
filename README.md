@@ -5,7 +5,7 @@
 | Cloud Storage | link |
 |  :---: | :---: |
 | Google Drive | [link](https://drive.google.com/drive/folders/14-0Ew5qVWh607tdFsovbXZsdWX-vU-Vy?usp=sharing) |
-| Yandex Disk | [link](https://disk.yandex.ru/d/mw4qmSfCBEAh7w) |
+<!-- | Yandex Disk | [link](https://disk.yandex.ru/d/mw4qmSfCBEAh7w) | -->
 <br/>
 
 
