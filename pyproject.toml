@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "itlp-campus"
+version = "0.1.0"
+description = "ITLP-Campus dataset SDK."
+authors = [
+    "Alexander Melekhin <amelekhin96@gmail.com>",
+    "Vitalyy Bezuglyj",
+    "Ilya Petryashin",
+    "Dmitry Yudin",
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8.1,<3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
