@@ -10,6 +10,11 @@ authors = [
 ]
 readme = "README.md"
 
+[[tool.poetry.source]]
+name = "rospypi"
+url = "https://rospypi.github.io/simple/"
+priority = "supplemental"
+
 [tool.poetry.dependencies]
 python = ">=3.8.1,<3.12"
 numpy = "<1.25"
@@ -19,6 +24,10 @@ addict = "^2.4.0"
 pillow = "^10.1.0"
 pandas = "<2.1"
 tqdm = "^4.66.1"
+rospy = {version = "^1.15.11", source = "rospypi"}
+rosbag = {version = "^1.15.11", source = "rospypi"}
+std-msgs = {version = "^0.5.13.post0", source = "rospypi"}
+rosgraph-msgs = {version = "^1.11.3.post2", source = "rospypi"}
 
 [tool.poetry.group.dev]
 optional = true
