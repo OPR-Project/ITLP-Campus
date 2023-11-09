@@ -29,6 +29,8 @@ rosbag = { version = "^1.15.11", source = "rospypi" }
 std-msgs = { version = "^0.5.13.post0", source = "rospypi" }
 rosgraph-msgs = { version = "^1.11.3.post2", source = "rospypi" }
 opencv-python = "^4.8.1.78"
+cv-bridge = {version = "^1.13.0.post1", source = "rospypi"}
+sensor-msgs = {version = "^1.13.0.post3", source = "rospypi"}
 
 [tool.poetry.group.torch]
 optional = true

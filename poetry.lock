@@ -295,6 +295,22 @@ test = ["PyYAML", "mock", "pytest"]
 yaml = ["PyYAML"]
 
 [[package]]
+name = "cv-bridge"
+version = "1.13.0.post1"
+description = "This contains CvBridge, which converts between ROS Image messages and OpenCV images."
+optional = false
+python-versions = "*"
+files = [
+    {file = "cv_bridge-1.13.0.post1-py2.py3-none-any.whl", hash = "sha256:526e5f06d9b68e8718c5b4bb6932ae8b97fbfd89db3b0dae7a68ed04292f092a"},
+    {file = "cv_bridge-1.13.0.post1.tar.gz", hash = "sha256:79d13c82305488bad08e79264d97eaf41ae28c9fb7d374c51aba8ebb91fe43c9"},
+]
+
+[package.source]
+type = "legacy"
+url = "https://rospypi.github.io/simple"
+reference = "rospypi"
+
+[[package]]
 name = "dash"
 version = "2.14.1"
 description = "A Python framework for building reactive web-apps. Developed by Plotly."
@@ -1902,6 +1918,22 @@ doc = ["matplotlib (>2)", "numpydoc", "pydata-sphinx-theme (==0.9.0)", "sphinx (
 test = ["asv", "gmpy2", "mpmath", "pooch", "pytest", "pytest-cov", "pytest-timeout", "pytest-xdist", "scikit-umfpack", "threadpoolctl"]
 
 [[package]]
+name = "sensor-msgs"
+version = "1.13.0.post3"
+description = "This package defines messages for commonly used sensors, including cameras and scanning laser rangefinders."
+optional = false
+python-versions = "*"
+files = [
+    {file = "sensor_msgs-1.13.0.post3-py2.py3-none-any.whl", hash = "sha256:e534ac9dc96be35c6846456b2e8baa3125709572662a1bfdfe65a96ac9fae37a"},
+    {file = "sensor_msgs-1.13.0.post3.tar.gz", hash = "sha256:9a09d113c6d6a047584b7f9a4d6b911cd2261c20673f9b5bcd5b74df271f61f2"},
+]
+
+[package.source]
+type = "legacy"
+url = "https://rospypi.github.io/simple"
+reference = "rospypi"
+
+[[package]]
 name = "setuptools"
 version = "68.2.2"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
@@ -2204,4 +2236,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8.1,<3.12"
-content-hash = "ddd601c1140c2baef4142e4fd32c21bebc33191f996fc61c823d3332559f4d3c"
+content-hash = "aec20595fe3de1948de957539489dcfeead321064db7fa29d109bcc58134f6ee"
