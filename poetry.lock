@@ -569,6 +569,25 @@ url = "https://rospypi.github.io/simple"
 reference = "rospypi"
 
 [[package]]
+name = "geometry-msgs"
+version = "1.13.0.post2"
+description = ""
+optional = false
+python-versions = "*"
+files = [
+    {file = "geometry_msgs-1.13.0.post2-py2.py3-none-any.whl", hash = "sha256:ead9843dc6089c0f77d0498ac23cf8d0fe1f4b7d9a56d83a5d905951d3029635"},
+    {file = "geometry_msgs-1.13.0.post2.tar.gz", hash = "sha256:d6adbc4754a16269592dc87910220cde644e034794f1edbd6a30890d0bd76455"},
+]
+
+[package.dependencies]
+genpy = ">=0.6.14,<2000"
+
+[package.source]
+type = "legacy"
+url = "https://rospypi.github.io/simple"
+reference = "rospypi"
+
+[[package]]
 name = "gnupg"
 version = "2.3.1"
 description = "A Python wrapper for GnuPG"
@@ -2236,4 +2255,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8.1,<3.12"
-content-hash = "aec20595fe3de1948de957539489dcfeead321064db7fa29d109bcc58134f6ee"
+content-hash = "7eb0c673b69a1d3834f0ea68308df91ec50b22d3243c333c5b140f3a409ff4e7"
