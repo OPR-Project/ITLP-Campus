@@ -66,12 +66,16 @@ if __name__ == "__main__":
     parser.add_argument(
         "-t", "--trajectory", type=str, default=None, required=False, help="Path to the TUM file"
     )
+    parser.add_argument(
+        "-s", "--voxel_size", type=float, default=0.5, required=False, help="Downsample voxel size"
+    )
     args = parser.parse_args()
 
     input_file_path = Path(args.file)
     trajectory_file_path = Path(args.trajectory) if args.trajectory else None
 
     pcd = o3d.io.read_point_cloud(str(input_file_path))
+    pcd = pcd.voxel_down_sample(voxel_size=args.voxel_size)
     poses = read_tum_file(trajectory_file_path) if trajectory_file_path else None
 
     vis = o3d.visualization.Visualizer()
@@ -80,11 +84,11 @@ if __name__ == "__main__":
     vis.add_geometry(pcd)
 
     if poses is not None:
-        for pose in poses:
+        for pose in poses[::10]:
             pose_matrix = np.eye(4)
             pose_matrix[:3, 3] = pose[1:4]  # translation
             pose_matrix[:3, :3] = quaternion_to_rotation_matrix(pose[4:])  # rotation
-            pose_frame = create_coordinate_frame(size=0.5)
+            pose_frame = create_coordinate_frame(size=1.0)
             pose_frame.transform(pose_matrix)
             vis.add_geometry(pose_frame)
 
