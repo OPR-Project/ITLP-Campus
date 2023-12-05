@@ -32,6 +32,7 @@ opencv-python = "^4.8.1.78"
 cv-bridge = {version = "^1.13.0.post1", source = "rospypi"}
 sensor-msgs = {version = "^1.13.0.post3", source = "rospypi"}
 geometry-msgs = {version = "^1.13.0.post2", source = "rospypi"}
+matplotlib = "<3.8"
 
 [tool.poetry.group.torch]
 optional = true
