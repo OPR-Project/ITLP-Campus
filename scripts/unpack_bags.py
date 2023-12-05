@@ -71,7 +71,7 @@ if __name__ == "__main__":
     input_dir = Path(args.dir)
     output_dir = Path(args.out_dir)
 
-    bag_files_list = [f for f in input_dir.iterdir() if f.suffix == ".bag"]
+    bag_files_list = [f for f in input_dir.iterdir() if f.suffix == ".bag" and f.stem != "trajectory"]
 
     for bag_file_path in tqdm(
         bag_files_list, desc="Extracting images and point clouds", position=0, leave=True
