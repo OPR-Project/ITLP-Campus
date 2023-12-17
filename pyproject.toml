@@ -33,6 +33,10 @@ cv-bridge = {version = "^1.13.0.post1", source = "rospypi"}
 sensor-msgs = {version = "^1.13.0.post3", source = "rospypi"}
 geometry-msgs = {version = "^1.13.0.post2", source = "rospypi"}
 matplotlib = "<3.8"
+tf = {version = "^1.12.1.post3", source = "rospypi"}
+tf2-ros = {version = "^0.6.5", source = "rospypi"}
+tf2-msgs = {version = "^0.7.2.post3", source = "rospypi"}
+tf2-msgs-stubs = {version = "^0.1.0", source = "rospypi"}
 
 [tool.poetry.group.torch]
 optional = true
