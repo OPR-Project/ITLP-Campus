@@ -121,7 +121,7 @@ def export_from_bag(
     bag.close()
 
 
-def read_trajectory(filepath: Path) -> DataFrame:
+def read_trajectory_bag(filepath: Path) -> DataFrame:
     """Reads a trajectory from a ROS bag file.
 
     Args:
@@ -144,6 +144,37 @@ def read_trajectory(filepath: Path) -> DataFrame:
             "qw": [msg.transform.rotation.w],
         }
         data = merge_dicts(data, row)
+    df = DataFrame(data=data)
+    return df
+
+
+def read_trajectory_tum(filepath: Path) -> DataFrame:
+    """Reads a trajectory from a file in tum format.
+
+    Args:
+        filepath (Path): Path to the trajectory file.
+
+    Returns:
+        DataFrame: Trajectory dataframe.
+    """
+    data = {"timestamp": [], "tx": [], "ty": [], "tz": [], "qx": [], "qy": [], "qz": [], "qw": []}
+    with open(filepath, "r") as f:
+        for line in f.readlines():
+            line = line.strip().split(" ")
+            timestamp = int(float(line[0]) * 1e9)
+            tx, ty, tz = [float(x) for x in line[1:4]]
+            qx, qy, qz, qw = [float(x) for x in line[4:8]]
+            row = {
+                "timestamp": [timestamp],
+                "tx": [tx],
+                "ty": [ty],
+                "tz": [tz],
+                "qx": [qx],
+                "qy": [qy],
+                "qz": [qz],
+                "qw": [qw],
+            }
+            data = merge_dicts(data, row)
     df = DataFrame(data=data)
     return df
 
@@ -175,7 +206,7 @@ if __name__ == "__main__":
     dist_threshold = float(args.dist_threshold)
 
     bag_files_list = sorted([f for f in input_dir.iterdir() if f.suffix == ".bag" and f.stem != "trajectory"])
-    trajectory_bag_file = args.trajectory
+    trajectory_bag_file = Path(args.trajectory)
 
     timestamps_dict = {"front_cam": [], "back_cam": [], "lidar": []}
 
@@ -186,7 +217,12 @@ if __name__ == "__main__":
 
     timestamps_dict = {key: np.array(value) for key, value in timestamps_dict.items()}
 
-    poses_df = read_trajectory(trajectory_bag_file)
+    if trajectory_bag_file.suffix == ".bag":
+        poses_df = read_trajectory_bag(trajectory_bag_file)
+    elif trajectory_bag_file.suffix == ".tum" or trajectory_bag_file.suffix == ".txt":
+        poses_df = read_trajectory_tum(trajectory_bag_file)
+    else:
+        raise ValueError(f"Unsupported trajectory file format: {trajectory_bag_file.suffix}")
 
     filtered_indices = filter_timestamps(
         pose_ts=poses_df["timestamp"].to_numpy(),
