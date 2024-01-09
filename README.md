@@ -172,17 +172,21 @@ data = dataset[0]  # will return dictionary with the first frame of the track
 
 ### Download
 
-You can download the dataset using API:
+[Google Drive folder](https://drive.google.com/drive/folders/14-0Ew5qVWh607tdFsovbXZsdWX-vU-Vy?usp=sharing)
 
-```python
-from src.dataset import ITLPCampus
-
-ITLPCampus.download(out_dir="path/to/directory/where/you/want/to/save/dataset")
-```
-
-Or you can use provided [download_dataset.py](./download_dataset.py) script:
-
-```bash
-# in repository root directory
-python download_dataset.py --output_dir [OUTPUT_DIR]
-```
+<details>
+  <summary>You can download the part 1 of the dataset using API:</summary>
+  
+  ```python
+  from src.dataset import ITLPCampus
+  
+  ITLPCampus.download(out_dir="path/to/directory/where/you/want/to/save/dataset")
+  ```
+  
+  Or you can use provided [download_dataset.py](./download_dataset.py) script:
+  
+  ```bash
+  # in repository root directory
+  python download_dataset.py --output_dir [OUTPUT_DIR]
+  ```
+</details>
