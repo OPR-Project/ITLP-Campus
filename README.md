@@ -82,7 +82,9 @@ An example of a **indoor** track trajectory  (track_map.png):
 
 | Track | Frames, pcs | Front cam, res | Back cam, res | LiDAR, rays | 6 DoF pose | Semantic masks | Aruco tag | OCR Text labels |
 |  :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 00_2023-03-13 | $3883$ | $1280\times 720$ | $1280\times 720$ | 16 | &#9745; | $1280	\times 720 \times 150$  | &#9745; | &#9745; |
+| 2023-03-13 | $3883$ | $1280\times 720$ | $1280\times 720$ | 16 | &#9745; | $1280	\times 720 \times 150$  | &#9745; | &#9745; |
+| 00_2023-10-25-night | $1233$ | $1280\times 720$ | $1280\times 720$ | 16 | &#9745; | $1280	\times 720 \times 150$  | &#9745; | &#9745; |
+| 01_2023-11-09-twilight | $1310$ | $1280\times 720$ | $1280\times 720$ | 16 | &#9745; | $1280	\times 720 \times 150$  | &#9745; | &#9745; |
 <br/>
 
 6 DoF poses are obtained using Cartographer SLAM with global localization in a pre-built map.
