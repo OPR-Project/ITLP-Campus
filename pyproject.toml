@@ -57,6 +57,7 @@ isort = "^5.12.0"
 flake8-isort = "^6.1.1"
 pre-commit = "^3.5.0"
 dvc = {extras = ["ssh"], version = "^3.31.2"}
+pytest = "^8.0.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -70,3 +71,8 @@ profile = "black"
 
 [tool.flake8]
 max-line-length = 110
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
