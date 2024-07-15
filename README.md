@@ -121,6 +121,10 @@ The outdor part of this dataset was recorded on the Husky robotics platform on t
 | 02_2023-02-10 | winter | twilight | $609$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; | front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
 | 03_2023-04-11 | spring | day | $638$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; | front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
 | 04_2023-04-13 | spring | night | $631$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; |  front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
+| 05_2023-08-15 | summer | day | $833$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; |  front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
+| 06_2023-08-18 | summer | night | $831$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; |  front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
+| 07_2023-10-04 | autumn | day | $896$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; |  front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
+| 08_2023-10-11 | autumn | night | $895$ | $1280	\times 720$ | $1280	\times 720$ | 16 | &#9745; |  front + back <br/> $1280	\times 720 \times 65$ classes  |&#9745; | &#9745; |
 <br/>
 
 6 DoF poses obtained using ALeGO-LOAM localization method refined with Interactive SLAM.
