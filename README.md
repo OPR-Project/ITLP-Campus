@@ -76,7 +76,7 @@ An example of a **outdoor** track trajectory  (track_map.png):
 An example of a **indoor** track trajectory  (track_map.png):
 ![](img/00_indoor_track_map.png)
 
-## Indoor
+## ITLP-Campus Indoor
 
 ### Data
 
@@ -109,7 +109,7 @@ The semantic markup contains a total of $150$ classes. A complete table of all s
 An example of a mask over the image:
 ![](img/sem_mask_image_indoor.png)
 
-## Outdoor
+## ITLP-Campus Outdoor
 The outdor part of this dataset was recorded on the Husky robotics platform on the university campus and consists of 5 tracks recorded at different times of day (day/dusk/night) and different seasons (winter/spring).
 
 ### Data
