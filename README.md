@@ -13,9 +13,9 @@
 
 | Sensor | Model | Resolution |
 |  :---: | :---: | :---: |
-| Front cam | ZED (stereo) | $1280x720$ |
-| Back cam | RealSense D435 | $1280x720$ |
-| LiDAR | VLP-16 | $16\times 1824$ |
+| Front cam | ZED (stereo) | 1280x720 |
+| Back cam | RealSense D435 | 1280x720 |
+| LiDAR | VLP-16 | 16x1824 |
 <br/>
 
 ## Structure
@@ -82,9 +82,9 @@ An example of a **indoor** track trajectory  (track_map.png):
 
 | Track | Frames, pcs | Front cam, res | Back cam, res | LiDAR, rays | 6 DoF pose | Semantic masks | Aruco tag | OCR Text labels |
 |  :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 2023-03-13 | $3883$ | $1280x720$ | $1280x720$ | 16 | &#9745; | $1280x720x150$  | &#9745; | &#9745; |
-| 00_2023-10-25-night | $1233$ | $1280x720$ | $1280x720$ | 16 | &#9745; | $1280x720x150$  | &#9745; | &#9745; |
-| 01_2023-11-09-twilight | $1310$ | $1280x720$ | $1280x720$ | 16 | &#9745; | $1280x720x150$  | &#9745; | &#9745; |
+| 2023-03-13 | 3883 | 1280x720 | 1280x720 | 16 | &#9745; | 1280x720x150  | &#9745; | &#9745; |
+| 00_2023-10-25-night | 1233 | 1280x720 | 1280x720 | 16 | &#9745; | 1280x720x150  | &#9745; | &#9745; |
+| 01_2023-11-09-twilight | 1310 | 1280x720 | 1280x720 | 16 | &#9745; | 1280x720x150  | &#9745; | &#9745; |
 <br/>
 
 6 DoF poses are obtained using Cartographer SLAM with global localization in a pre-built map.
@@ -97,14 +97,14 @@ The masks are stored as mono-channel images.Each pixel stores a semantic label. 
 | Label | Semantic class | Color, [r, g, b] |
 |  :---: | :---: | :---: |
 | ... | ... | ... |
-| $14$ | door; double door | [8, 255, 51] |
-| $23$ | sofa; couch; lounge | [11, 102, 255] |
-| $67$ | book | [255, 163, 0] |
-| $124$ | microwave; microwave; oven | [255, 0, 235] |
+| 14  | door; double door | [8, 255, 51] |
+| 23 | sofa; couch; lounge | [11, 102, 255] |
+| 67 | book | [255, 163, 0] |
+| 124 | microwave; microwave; oven | [255, 0, 235] |
 | ... | ... | ... |
 <br/>
 
-The semantic markup contains a total of $150$ classes. A complete table of all semantic classes is given in the table - [cfg/indoor_anno_description.md](cfg/indoor_anno_description.md). To map the id labels with rgb colors you should use the configuration file - [cfg/indoor_anno_config.json](cfg/indoor_anno_config.json).
+The semantic markup contains a total of $150 classes. A complete table of all semantic classes is given in the table - [cfg/indoor_anno_description.md](cfg/indoor_anno_description.md). To map the id labels with rgb colors you should use the configuration file - [cfg/indoor_anno_config.json](cfg/indoor_anno_config.json).
 
 An example of a mask over the image:
 ![](img/sem_mask_image_indoor.png)
@@ -116,15 +116,15 @@ The outdor part of this dataset was recorded on the Husky robotics platform on t
 
 | Track | Season | Time of day | Frames, pcs | Front cam, res | Back cam, res | LiDAR, rays | 6 DoF pose | Semantic masks | Aruco tag | OCR Text labels |
 |  :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |:---: | :---: | :---: |
-| 00_2023-02-21 | winter | day | $620$ | $1280x720$ | $1280x720$ | 16 | &#9745; | front + back <br/> $1280x720x65$ classes  | &#9745; | &#9745; |
-| 01_2023-03-15 | winter| night | $626$ | $1280x720$ | $1280x720$ | 16 | &#9745; | front + back <br/> $1280x720x65$ classes  |&#9745; | &#9745; |
-| 02_2023-02-10 | winter | twilight | $609$ | $1280x720$ | $1280x720$ | 16 | &#9745; | front + back <br/> $1280x720x65$ classes  |&#9745; | &#9745; |
-| 03_2023-04-11 | spring | day | $638$ | $1280x720$ | $1280x720$ | 16 | &#9745; | front + back <br/> $1280x720x65$ classes  |&#9745; | &#9745; |
-| 04_2023-04-13 | spring | night | $631$ | $1280x720$ | $1280x720$ | 16 | &#9745; |  front + back <br/> $1280x720x65$ classes  |&#9745; | &#9745; |
-| 05_2023-08-15 | summer | day | $833$ | $1280x720$ | $1280x720$ | 16 | &#9745; |  front + back <br/> $1280x720x65$ classes  |&#9745; | &#9745; |
-| 06_2023-08-18 | summer | night | $831$ | $1280x720$ | $1280x720$ | 16 | &#9745; |  front + back <br/> $1280x720x65$ classes  |&#9745; | &#9745; |
-| 07_2023-10-04 | autumn | day | $896$ | $1280x720$ | $1280x720$ | 16 | &#9745; |  front + back <br/> $1280x720x65$ classes  |&#9745; | &#9745; |
-| 08_2023-10-11 | autumn | night | $895$ | $1280x720$ | $1280x720$ | 16 | &#9745; |  front + back <br/> $1280x720x65$ classes  |&#9745; | &#9745; |
+| 00_2023-02-21 | winter | day | 620 | 1280x720 | 1280x720 | 16 | &#9745; | front + back <br/> 1280x720x65 classes  | &#9745; | &#9745; |
+| 01_2023-03-15 | winter| night | 626 | 1280x720 | 1280x720 | 16 | &#9745; | front + back <br/> 1280x720x65 classes  |&#9745; | &#9745; |
+| 02_2023-02-10 | winter | twilight | 609 | 1280x720 | 1280x720 | 16 | &#9745; | front + back <br/> 1280x720x65 classes  |&#9745; | &#9745; |
+| 03_2023-04-11 | spring | day | 638 | 1280x720 | 1280x720 | 16 | &#9745; | front + back <br/> 1280x720x65 classes  |&#9745; | &#9745; |
+| 04_2023-04-13 | spring | night | 631 | 1280x720 | 1280x720 | 16 | &#9745; |  front + back <br/> 1280x720x65 classes  |&#9745; | &#9745; |
+| 05_2023-08-15 | summer | day | 833 | 1280x720 | 1280x720 | 16 | &#9745; |  front + back <br/> 1280x720x65 classes  |&#9745; | &#9745; |
+| 06_2023-08-18 | summer | night | 831 | 1280x720 | 1280x720 | 16 | &#9745; |  front + back <br/> 1280x720x65 classes  |&#9745; | &#9745; |
+| 07_2023-10-04 | autumn | day | 896 | 1280x720 | 1280x720 | 16 | &#9745; |  front + back <br/> 1280x720x65 classes  |&#9745; | &#9745; |
+| 08_2023-10-11 | autumn | night | 895 | 1280x720 | 1280x720 | 16 | &#9745; |  front + back <br/> 1280x720x65 classes  |&#9745; | &#9745; |
 <br/>
 
 6 DoF poses obtained using ALeGO-LOAM localization method refined with Interactive SLAM.
