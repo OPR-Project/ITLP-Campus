@@ -1,5 +1,12 @@
 # ITLP-Campus
 
+This dataset can be used for:
+
+- 🧪 **Developing and testing localization algorithms** using real-world data collected across various seasons, times of day, and weather conditions.
+- 📚 **Educational and research projects** on multimodal localization, machine learning, and computer vision.
+- 📈 **Benchmarking** and comparative analysis of global localization algorithms.
+- 🎯 **Creating machine learning models** robust to environmental changes and external conditions.
+
 ## Download
 
 | Cloud Storage | link |
