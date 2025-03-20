@@ -223,3 +223,9 @@ data = dataset[0]  # will return dictionary with the first frame of the track
   python download_dataset.py --output_dir [OUTPUT_DIR]
   ```
 </details>
+
+# License
+
+The code is under [Apache 2.0 license](./LICENSE).
+
+The data is under [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
