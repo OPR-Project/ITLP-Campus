@@ -163,7 +163,12 @@ An example of a mask over the image:
 
 ## PyTorch dataset API
 
-Implementation of PyTorch's dataset class for ITLP-Campus track is provided in the `[src/dataset.py](./src/dataset.py)` file.
+> Check out out [OpenPlaceRecognition library](https://github.com/OPR-Project/OpenPlaceRecognition).
+> It is a library for place recognition and localization, which includes a collection of datasets, including ITLP-Campus.
+> The library provides a unified API for loading datasets, training and evaluating models, and performing place recognition tasks.
+> The library is designed to be easy to use and extensible, allowing researchers and developers to quickly experiment with different models and datasets.
+
+Implementation of PyTorch's dataset class for ITLP-Campus track is provided in the [src/itlp_campus/dataset.py](./src/itlp_campus/dataset.py) file.
 
 That class can be used for loading the track's data in the format of `torch.Tensor`.
 
@@ -206,27 +211,6 @@ dataset = ITLPCampus(
 
 data = dataset[0]  # will return dictionary with the first frame of the track
 ```
-
-### Download
-
-[Google Drive folder](https://drive.google.com/drive/folders/14-0Ew5qVWh607tdFsovbXZsdWX-vU-Vy?usp=sharing)
-
-<details>
-  <summary>You can download the part 1 of the dataset using API:</summary>
-
-  ```python
-  from src.dataset import ITLPCampus
-
-  ITLPCampus.download(out_dir="path/to/directory/where/you/want/to/save/dataset")
-  ```
-
-  Or you can use provided [download_dataset.py](./download_dataset.py) script:
-
-  ```bash
-  # in repository root directory
-  python download_dataset.py --output_dir [OUTPUT_DIR]
-  ```
-</details>
 
 # License
 

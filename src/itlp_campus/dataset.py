@@ -3,7 +3,6 @@ from pathlib import Path
 from typing import Dict, List, Literal, Optional, Tuple, Union
 
 import cv2
-import gdown
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -12,8 +11,8 @@ from pandas import DataFrame
 from torch import Tensor
 from torch.utils.data import Dataset
 
-from src.visualizations import get_colored_mask
-from src.transforms import (
+from .visualizations import get_colored_mask
+from .transforms import (
     DefaultCloudSetTransform,
     DefaultCloudTransform,
     DefaultImageTransform,
@@ -421,41 +420,4 @@ class ITLPCampus(Dataset):
 
     @staticmethod
     def download_data(out_dir: Union[Path, str]) -> None:
-        outdoor_tracks_dict = {
-            "00_2023-02-10": "17HVoPmM7iR1f2Aj8H9GYzOqieCKwjh96",
-            "01_2023-02-21": "1mezN1c8-3ylZrub9_lnGlJzipr90K63O",
-            "02_2023-03-15": "1lKdW7ZfpaNLiIQtoJozoSqx397H7iwb1",
-            "03_2023-04-11": "18t79U4IKxABTMYdSBOafwlUGlYvJcltx",
-            "04_2023-04-13": "1KMTMU-oxXbBV8bmtAY1g8GsquGFksDcE",
-        }
-        indoor_tracks_dict = {
-            "00_2023-03-13": "1AFPKdMrXwPlcC50d1Y8DL4g11CbD31Q2",
-        }
-
-        out_dir = Path(out_dir)
-        if not out_dir.exists():
-            print(f"Creating output directory: {out_dir}")
-            out_dir.mkdir(parents=True)
-        else:
-            print(f"Will download in existing directory: {out_dir}")
-
-        outdoor_dir = out_dir / "ITLP_Campus_outdoor"
-        outdoor_dir.mkdir(exist_ok=True)
-        for track_name, file_id in outdoor_tracks_dict.items():
-            gdown.download(
-                f"https://drive.google.com/uc?export=download&confirm=pbef&id={file_id}",
-                output=str(outdoor_dir / f"{track_name}.zip"),
-                quiet=False,
-                fuzzy=False,
-                use_cookies=False,
-            )
-        indoor_dir = out_dir / "ITLP_Campus_indoor"
-        indoor_dir.mkdir(exist_ok=True)
-        for track_name, file_id in indoor_tracks_dict.items():
-            gdown.download(
-                f"https://drive.google.com/uc?export=download&confirm=pbef&id={file_id}",
-                output=str(indoor_dir / f"{track_name}.zip"),
-                quiet=False,
-                fuzzy=False,
-                use_cookies=False,
-            )
+        pass
