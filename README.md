@@ -20,6 +20,40 @@ You can download the dataset:
 
 The dataset is distributed under the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
 
+## Installation
+
+To install the package, clone the repository and install the it using pip:
+
+```bash
+git clone https://github.com/OPR-Project/ITLP-Campus.git
+
+cd ITLP-Campus
+pip install .
+```
+
+### Requirements
+
+#### Hardware
+
+- **CPU**: 6 or more physical cores
+- **RAM**: at least 8 GB
+- **GPU**: NVIDIA RTX 2060 or higher (to ensure adequate performance)
+- **Video memory**: at least 4 GB
+- **Storage**: SSD recommended for faster loading of data and models
+
+#### Software
+
+- **Operating System**:
+  - Any OS with support for Docker and CUDA >= 11.1.
+    *Ubuntu 20.04 or later is recommended.*
+
+- **Dependencies**:
+  - Python >= 3.10
+  - CUDA Toolkit >= 11.1
+  - cuDNN >= 7.5
+
+Other dependencies are listed in the [`pyproject.toml`](pyproject.toml) file and will be installed automatically when you install the package.
+
 ## Sensors
 
 | Sensor | Model | Resolution |
