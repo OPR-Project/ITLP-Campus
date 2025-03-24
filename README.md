@@ -9,12 +9,16 @@ This dataset can be used for:
 
 ## Download
 
-| Cloud Storage | link |
-|  :---: | :---: |
-| Google Drive | [link](https://drive.google.com/drive/folders/14-0Ew5qVWh607tdFsovbXZsdWX-vU-Vy?usp=sharing) |
-| Yandex Disk | [link](https://disk.yandex.com/d/tvPdmWTTw5mEQg) |
+You can download the dataset:
 
-<br/>
+- Kaggle:
+  - [ITLP Campus Outdoor](https://www.kaggle.com/datasets/alexandermelekhin/itlp-campus-outdoor)
+  - [ITLP Campus Indoor](https://www.kaggle.com/datasets/alexandermelekhin/itlp-campus-indoor)
+- Hugging Face:
+  - [ITLP Campus Outdoor](https://huggingface.co/datasets/OPR-Project/ITLP-Campus-Outdoor)
+  - [ITLP Campus Indoor](https://huggingface.co/datasets/OPR-Project/ITLP-Campus-Indoor)
+
+The dataset is distributed under the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
 
 ## Sensors
 
