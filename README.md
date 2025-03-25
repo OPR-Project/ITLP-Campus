@@ -9,7 +9,7 @@ This dataset can be used for:
 
 ## Download
 
-You can download the dataset:
+You can download the dataset manually from the following links:
 
 - Kaggle:
   - [ITLP Campus Outdoor](https://www.kaggle.com/datasets/alexandermelekhin/itlp-campus-outdoor)
@@ -17,6 +17,15 @@ You can download the dataset:
 - Hugging Face:
   - [ITLP Campus Outdoor](https://huggingface.co/datasets/OPR-Project/ITLP-Campus-Outdoor)
   - [ITLP Campus Indoor](https://huggingface.co/datasets/OPR-Project/ITLP-Campus-Indoor)
+
+Or you can use the [`download_dataset.py`](download_dataset.py) script to download the dataset automatically. The script will download the dataset from HF and save it into the specified directory.
+
+```bash
+python download_dataset.py \
+    --output_dir /path/to/dataset \
+    --outdoor \  # download outdoor dataset (optional flag)
+    --indoor  # download indoor dataset (optional flag)
+```
 
 The dataset is distributed under the [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
 
