@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import torch
+from huggingface_hub import snapshot_download
 from pandas import DataFrame
 from torch import Tensor
 from torch.utils.data import Dataset
@@ -18,6 +19,10 @@ from .transforms import (
     DefaultImageTransform,
     DefaultSemanticTransform,
 )
+
+
+OUTDOOR_DATASET_REPO = "OPR-Project/ITLP-Campus-Outdoor"
+INDOOR_DATASET_REPO = "OPR-Project/ITLP-Campus-Indoor"
 
 
 class ITLPCampus(Dataset):
@@ -419,5 +424,23 @@ class ITLPCampus(Dataset):
         return im
 
     @staticmethod
-    def download_data(out_dir: Union[Path, str]) -> None:
-        pass
+    def download_outdoor_data(out_dir: Union[Path, str]) -> None:
+        """Download indoor dataset from HuggingFace hub."""
+        out_dir = Path(out_dir)
+        out_dir.mkdir(parents=True, exist_ok=True)
+
+        print(f"Downloading outdoor dataset from {OUTDOOR_DATASET_REPO} to {out_dir}...")
+        snapshot_download(repo_id=OUTDOOR_DATASET_REPO, repo_type="dataset", local_dir=out_dir)
+                        
+        print(f"Dataset successfully downloaded to {out_dir}")
+
+    @staticmethod
+    def download_indoor_data(out_dir: Union[Path, str]) -> None:
+        """Download indoor dataset from HuggingFace hub."""
+        out_dir = Path(out_dir)
+        out_dir.mkdir(parents=True, exist_ok=True)
+
+        print(f"Downloading indoor dataset from {INDOOR_DATASET_REPO} to {out_dir}...")
+        snapshot_download(repo_id=INDOOR_DATASET_REPO, repo_type="dataset", local_dir=out_dir)
+                        
+        print(f"Dataset successfully downloaded to {out_dir}")
